@@ -12,9 +12,32 @@
 
 
 def bracket_matcher(stri):
-  # code goes here
-  return
-
+  # Use a list to define the empty stack
+  stack = []
+  # Loop over the string and check for opening brackets
+  for i in stri:
+    if i in ['(', '{', '[']:
+      # Push opening brackets to the stack
+      stack.append(i)
+      print(stack)
+    elif i in [')', '}', ']']:
+      # Find closing brackets
+      if len(stack) == 0:
+        # If there are closing brackets and no opening brackets, return false
+        return False
+      elif len(stack) > 0 and i in [')', '}', ']']:
+        # If there are opening brackets, check for a match, then pop the matching opening bracket
+        if i == ')' and stack[-1] == '(' or i == '}' and stack[-1] == '{' or i == ']' and stack[-1] == '[':
+          print(i)
+          print(stack[-1])
+          stack.pop()
+          print(stack)     
+  if len(stack) == 0:
+    # Stack will be zero if brackets match
+    return True
+  else:
+    # Brackets do not match if the length of the stack is not zero
+    return False
 
 
 print(bracket_matcher('abc(123)'))
